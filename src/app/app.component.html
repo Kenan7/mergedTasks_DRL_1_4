@@ -1,2 +1,15 @@
-<div fxLayout="row" fxLayoutAlign="center center">heyy</div>
+<mat-tab-group mat-stretch-tabs>
+  <mat-tab label="IP Address Range">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <div class="mat-headline" fxFlex>IP address range</div>
+
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="e.g 0.0.0.0" value="" />
+        </mat-form-field>
+      </form>
+    </div>
+  </mat-tab>
+  <mat-tab label="Excel Data Viewer"> Content 1 </mat-tab>
+</mat-tab-group>
 <router-outlet></router-outlet>
