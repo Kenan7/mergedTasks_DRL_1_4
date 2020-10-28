@@ -1,20 +1,44 @@
+<!-- TODO: seperate the project to two main components - ip address and excel data viewer -->
+
 <mat-tab-group mat-stretch-tabs>
   <mat-tab label="IP Address Range">
     <div fxLayout="column" fxLayoutAlign="center center">
       <div class="mat-headline" fxFlex>IP address range</div>
 
-      <form class="example-form" (ngSubmit)="getIPFromAPI()">
-        <mat-form-field class="example-full-width">
-          <input
-            matInput
-            placeholder="e.g 0.0.0.0"
-            value=""
-            [(ngModel)]="ipAddress"
-            name="ipAddress"
-          />
-        </mat-form-field>
-      </form>
-      <div *ngIf="dataFromApi">IP address range found! {{ dataFromApi }}</div>
+      <div fxLayout="row">
+        <form
+          class="example-form"
+          fxFlex
+          (ngSubmit)="getIPFromAPI()"
+          #ipForm="ngForm"
+        >
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              placeholder="e.g 0.0.0.0 (enter to search)"
+              value=""
+              [(ngModel)]="ipAddress"
+              name="ipAddress"
+              [formControl]="ipp"
+              required
+            />
+            <mat-error *ngIf="ipp.invalid">{{ getErrorMessage() }}</mat-error>
+          </mat-form-field>
+          <div fxFlex style="margin-left: 10px">
+            <button
+              mat-raised-button
+              color="accent"
+              type="submit"
+              [disabled]="ipp.invalid"
+            >
+              <mat-icon>search</mat-icon>
+              Search
+            </button>
+          </div>
+        </form>
+      </div>
+      <!-- TODO: remove below label when input is cleared -->
+      <p *ngIf="dataFromApi">IP address range found! {{ dataFromApi }}</p>
     </div>
   </mat-tab>
   <mat-tab label="Excel Data Viewer"> Content 1 </mat-tab>
