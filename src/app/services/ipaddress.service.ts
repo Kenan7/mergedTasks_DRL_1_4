@@ -14,5 +14,9 @@ export class IpaddressService {
     return this.httpService.get(this.baseURL + '/get/' + ip);
   }
 
+  createEntry(formData: any) {
+    return this.httpService.post(this.baseURL + '/create', formData);
+  }
+
 
 }

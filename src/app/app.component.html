@@ -38,7 +38,50 @@
         </form>
       </div>
       <!-- TODO: remove below label when input is cleared -->
-      <p *ngIf="dataFromApi">IP address range found! {{ dataFromApi }}</p>
+
+      <form
+        [formGroup]="demoForm"
+        [hidden]="!createNew"
+        style="margin-top: 50px"
+      >
+        <div class="mat-headline">uhm.. do you want to create new one?</div>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Starts</mat-label>
+          <input
+            matInput
+            placeholder="e.g 47.0.0.0"
+            [formControl]="newIP1"
+            formControlName="first"
+            required
+          />
+        </mat-form-field>
+
+        <p>to</p>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Ends</mat-label>
+
+          <input
+            matInput
+            placeholder="e.g 47.0.0.3"
+            [formControl]="newIP2"
+            formControlName="last"
+            required
+          />
+        </mat-form-field>
+        <br />
+
+        <button
+          mat-raised-button
+          color="accent"
+          type="submit"
+          [disabled]="newIP1.invalid || newIP2.invalid"
+        >
+          <mat-icon>send</mat-icon>
+          Submit
+        </button>
+      </form>
     </div>
   </mat-tab>
   <mat-tab label="Excel Data Viewer"> Content 1 </mat-tab>
