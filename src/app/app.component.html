@@ -3,11 +3,18 @@
     <div fxLayout="column" fxLayoutAlign="center center">
       <div class="mat-headline" fxFlex>IP address range</div>
 
-      <form class="example-form">
+      <form class="example-form" (ngSubmit)="getIPFromAPI()">
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="e.g 0.0.0.0" value="" />
+          <input
+            matInput
+            placeholder="e.g 0.0.0.0"
+            value=""
+            [(ngModel)]="ipAddress"
+            name="ipAddress"
+          />
         </mat-form-field>
       </form>
+      <div *ngIf="dataFromApi">IP address range found! {{ dataFromApi }}</div>
     </div>
   </mat-tab>
   <mat-tab label="Excel Data Viewer"> Content 1 </mat-tab>

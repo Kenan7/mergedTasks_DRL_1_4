@@ -10,7 +10,6 @@ export class IpaddressService {
 
   constructor(private httpService: HttpClient) { }
 
-
   getIP(ip: string): Observable<any> {
     return this.httpService.get(this.baseURL + '/get/' + ip);
   }
