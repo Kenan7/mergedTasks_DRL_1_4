@@ -2,6 +2,7 @@ import { Component,  OnInit} from '@angular/core';
 import { IpaddressService } from './services/ipaddress.service';
 import {FormControl, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { error } from 'protractor';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,10 @@ export class AppComponent {
   title = 'mergedTasks';
   ipAddress: any;
   dataFromApi: any;
-  found = false;
   createNew = false;
+
+  ip_start_new: any;
+  ip_end_new: any;
 
   ipPattern = '(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)';
 
@@ -44,7 +47,7 @@ export class AppComponent {
     this.ipAddressService.getIP(this.ipAddress).subscribe((data: any) => {
       this.dataFromApi = data;
       if (this.dataFromApi.length > 0) {
-        this.found = true;
+        this.createNew = false;
         this.openSnackBar('we found an address range -- ' + data, 'Close', 6000, 'top');
       }
       else {
@@ -56,6 +59,20 @@ export class AppComponent {
       this.openSnackBar('raw error: ' + error, 'Close', 6000, 'top');
     })
     );
+  }
+
+  createNewEntry() {
+    const formData = {
+      ip1: this.ip_start_new,
+      ip2: this.ip_end_new,
+    };
+
+    this.ipAddressService.createEntry(formData).subscribe((data: any) => {
+      this.openSnackBar('Added!', 'Close', 5000, 'top');
+    },
+    error => {
+      this.openSnackBar('raw error: ' + error, 'Close', 15000, 'top');
+    });
   }
 
 

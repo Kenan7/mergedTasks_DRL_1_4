@@ -40,9 +40,9 @@
       <!-- TODO: remove below label when input is cleared -->
 
       <form
-        [formGroup]="demoForm"
         [hidden]="!createNew"
         style="margin-top: 50px"
+        (ngSubmit)="createNewEntry()"
       >
         <div class="mat-headline">uhm.. do you want to create new one?</div>
 
@@ -52,7 +52,8 @@
             matInput
             placeholder="e.g 47.0.0.0"
             [formControl]="newIP1"
-            formControlName="first"
+            [(ngModel)]="ip_start_new"
+            name="ip_start_new"
             required
           />
         </mat-form-field>
@@ -66,7 +67,8 @@
             matInput
             placeholder="e.g 47.0.0.3"
             [formControl]="newIP2"
-            formControlName="last"
+            [(ngModel)]="ip_end_new"
+            name="ip_end_new"
             required
           />
         </mat-form-field>
@@ -78,8 +80,8 @@
           type="submit"
           [disabled]="newIP1.invalid || newIP2.invalid"
         >
-          <mat-icon>send</mat-icon>
-          Submit
+          <mat-icon>add</mat-icon>
+          Add
         </button>
       </form>
     </div>
