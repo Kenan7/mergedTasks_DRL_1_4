@@ -10,11 +10,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialModule} from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { IpAddressComponent } from './components/ip-address/ip-address.component';
+import { ExcelViewerComponent } from './components/excel-viewer/excel-viewer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    IpAddressComponent
+    IpAddressComponent,
+    ExcelViewerComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +30,6 @@ import { IpAddressComponent } from './components/ip-address/ip-address.component
   ],
   providers: [],
   bootstrap: [AppComponent],
-  exports: [IpAddressComponent]
+  exports: [IpAddressComponent, ExcelViewerComponent]
 })
 export class AppModule { }
