@@ -1,0 +1,83 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div class="mat-headline" fxFlex>IP address range</div>
+
+  <div fxLayout="row">
+    <form
+      class="example-form"
+      fxFlex
+      (ngSubmit)="getIPFromAPI()"
+      #ipForm="ngForm"
+    >
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          placeholder="e.g 0.0.0.0 (enter to search)"
+          value=""
+          [(ngModel)]="ipAddress"
+          name="ipAddress"
+          [formControl]="ipp"
+          required
+        />
+        <mat-error *ngIf="ipp.invalid">{{ getErrorMessage() }}</mat-error>
+      </mat-form-field>
+      <div fxFlex style="margin-left: 10px">
+        <button
+          mat-raised-button
+          color="accent"
+          type="submit"
+          [disabled]="ipp.invalid"
+        >
+          <mat-icon>search</mat-icon>
+          Search
+        </button>
+      </div>
+    </form>
+  </div>
+  <!-- TODO: remove below label when input is cleared -->
+
+  <form
+    [hidden]="!createNew"
+    style="margin-top: 50px"
+    (ngSubmit)="createNewEntry()"
+  >
+    <div class="mat-headline">uhm.. do you want to create new one?</div>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Starts</mat-label>
+      <input
+        matInput
+        placeholder="e.g 47.0.0.0"
+        [formControl]="newIP1"
+        [(ngModel)]="ip_start_new"
+        name="ip_start_new"
+        required
+      />
+    </mat-form-field>
+
+    <p>to</p>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Ends</mat-label>
+
+      <input
+        matInput
+        placeholder="e.g 47.0.0.3"
+        [formControl]="newIP2"
+        [(ngModel)]="ip_end_new"
+        name="ip_end_new"
+        required
+      />
+    </mat-form-field>
+    <br />
+
+    <button
+      mat-raised-button
+      color="accent"
+      type="submit"
+      [disabled]="newIP1.invalid || newIP2.invalid"
+    >
+      <mat-icon>add</mat-icon>
+      Add
+    </button>
+  </form>
+</div>

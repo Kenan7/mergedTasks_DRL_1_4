@@ -9,10 +9,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MaterialModule} from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { IpAddressComponent } from './components/ip-address/ip-address.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    IpAddressComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [IpAddressComponent]
 })
 export class AppModule { }
