@@ -1,16 +1,54 @@
-<input hidden type="file" #uploader (change)="onFileChange($event)" />
+<div fxLayout="column" style="margin-top: 5%">
+  <div fxFlex>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <input hidden type="file" #uploader (change)="onFileChange($event)" />
+      <button mat-raised-button color="accent" (click)="uploader.click()">
+        <mat-icon>file_upload</mat-icon>
+        Load
+      </button>
 
-<button mat-raised-button color="warn" (click)="uploader.click()">
-  <mat-icon>file_upload</mat-icon>
-  Load
-</button>
+      <button mat-raised-button color="accent" (click)="toggleChart()">
+        <mat-icon>visibility</mat-icon>
+        Visualize
+      </button>
 
-<table class="darkTable">
-  <tbody>
-    <tr *ngFor="let row of data">
-      <td *ngFor="let val of row">
-        {{ val }}
-      </td>
-    </tr>
-  </tbody>
-</table>
+      <button mat-raised-button color="accent" (click)="outputRSquared()">
+        <mat-icon>functions</mat-icon>
+        R Square <span *ngIf="rSquare > 0">: {{ rSquare }}</span>
+      </button>
+
+      <mat-slide-toggle [(ngModel)]="tableSwitch" color="accent"
+        >Display Table</mat-slide-toggle
+      >
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <google-chart
+        #chart
+        [type]="type"
+        [data]="data"
+        [options]="options"
+        *ngIf="gChart"
+        [width]="700"
+        [height]="400"
+      >
+      </google-chart>
+    </div>
+
+    <div [hidden]="" class="mat-headline"></div>
+
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <div [hidden]="!tableSwitch" style="width: 40%">
+        <table class="darkTable">
+          <tbody>
+            <tr *ngFor="let row of data">
+              <td *ngFor="let val of row">
+                {{ val }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

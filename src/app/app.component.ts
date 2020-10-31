@@ -1,6 +1,4 @@
-import { Component,  OnInit} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
-import {IpAddressComponent} from './components/ip-address/ip-address.component';
+import { Component} from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,12 +7,6 @@ import {IpAddressComponent} from './components/ip-address/ip-address.component';
 export class AppComponent {
   title = 'mergedTasks';
 
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
-
-
+  constructor() {}
 
 }

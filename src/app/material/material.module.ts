@@ -8,6 +8,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 // import {} from '@angular/material/';
 // import {} from '@angular/material/';
@@ -21,7 +24,10 @@ const declarations = [
   MatIconModule,
   MatButtonModule,
   MatSnackBarModule,
-  MatTableModule
+  MatTableModule,
+  MatSlideToggleModule,
+  MatToolbarModule,
+  GoogleChartsModule
 ];
 
 @NgModule({
