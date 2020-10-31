@@ -10,10 +10,7 @@ type XLSX_DATA = any[][];
 })
 export class ExcelViewerComponent implements OnInit {
 
-  displayedColumns: string[] = ['0', '1'];
-
   data: XLSX_DATA;
-
 
   onFileChange(event: any) {
     const target: DataTransfer =  (event.target) as DataTransfer;
