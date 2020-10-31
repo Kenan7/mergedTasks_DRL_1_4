@@ -7,6 +7,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTableModule} from '@angular/material/table';
 
 // import {} from '@angular/material/';
 // import {} from '@angular/material/';
@@ -14,12 +15,13 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 const declarations = [
   MatCardModule,
-    MatTabsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
+  MatTabsModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatIconModule,
   MatButtonModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatTableModule
 ];
 
 @NgModule({

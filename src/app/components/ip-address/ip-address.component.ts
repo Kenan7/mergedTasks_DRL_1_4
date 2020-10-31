@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {FormControl, Validators} from '@angular/forms';
 import { IpaddressService } from '../../services/ipaddress.service';
@@ -7,7 +7,6 @@ import { IpaddressService } from '../../services/ipaddress.service';
   selector: 'app-ip-address',
   templateUrl: './ip-address.component.html',
   styleUrls: ['./ip-address.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IpAddressComponent implements OnInit {
 

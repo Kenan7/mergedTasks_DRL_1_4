@@ -1,1 +1,16 @@
-<p>excel-viewer works!</p>
+<input hidden type="file" #uploader (change)="onFileChange($event)" />
+
+<button mat-raised-button color="warn" (click)="uploader.click()">
+  <mat-icon>file_upload</mat-icon>
+  Load
+</button>
+
+<table class="darkTable">
+  <tbody>
+    <tr *ngFor="let row of data">
+      <td *ngFor="let val of row">
+        {{ val }}
+      </td>
+    </tr>
+  </tbody>
+</table>
