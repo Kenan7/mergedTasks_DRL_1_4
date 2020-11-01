@@ -11,7 +11,8 @@ import { HttpHeaders} from '@angular/common/http';
 export class IpaddressService {
 
   // baseURL = 'http://localhost:8000';
-  baseURL = 'http://35.246.47.238';
+  // baseURL = 'http://35.246.47.238';
+  baseURL = 'https://ip-address-range-api.herokuapp.com';
 
   headers = new HttpHeaders({
     'Content-Type': 'application/json',
