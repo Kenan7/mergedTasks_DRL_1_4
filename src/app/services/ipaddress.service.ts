@@ -7,7 +7,9 @@ import {catchError} from 'rxjs/operators';
 })
 export class IpaddressService {
 
-  baseURL = 'http://localhost:8000';
+  // baseURL = 'http://localhost:8000';
+  baseURL = 'http://35.246.47.238';
+
 
   constructor(private httpService: HttpClient) { }
 
