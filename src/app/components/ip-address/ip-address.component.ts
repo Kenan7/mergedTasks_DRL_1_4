@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {FormControl, Validators} from '@angular/forms';
 import { IpaddressService } from '../../services/ipaddress.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-ip-address',
@@ -10,7 +11,7 @@ import { IpaddressService } from '../../services/ipaddress.service';
 })
 export class IpAddressComponent implements OnInit {
 
-  constructor(private ipAddressService: IpaddressService, private snackBar: MatSnackBar) { }
+  constructor(private ipAddressService: IpaddressService, public snackBar: MatSnackBar) { }
 
   ipAddress: any;
   dataFromApi: any;
@@ -36,6 +37,8 @@ export class IpAddressComponent implements OnInit {
     Validators.pattern(this.ipPattern)
   ]));
 
+  errorMessage: any;
+
 
 
   getIPFromAPI() {
@@ -43,35 +46,36 @@ export class IpAddressComponent implements OnInit {
       this.dataFromApi = data;
       if (this.dataFromApi.length > 0) {
         this.createNew = false;
-        this.openSnackBar('we found an address range -- ' + data, 'Close', 6000, 'top');
+        this.openSnackBar('We found an address range: ' + data, 'Close', 6000, 'top');
       }
       else {
-        this.openSnackBar('we could not find anything in the database ¯\\_(ツ)_/¯', 'Close', 10000, 'top');
+        this.openSnackBar('We could not find anything in the database ¯\\_(ツ)_/¯', 'Close', 10000, 'top');
         this.createNew = true;
       }
     },
     (error => {
-      this.openSnackBar('raw error: ' + error, 'Close', 6000, 'top');
+      this.openSnackBar(error, 'Close', 6000, 'top');
     })
     );
   }
 
-  createNewEntry() {
+  createNewEntry(): void {
     const formData = {
       ip1: this.ip_start_new,
       ip2: this.ip_end_new,
     };
 
-    this.ipAddressService.createEntry(formData).subscribe((data: any) => {
-      this.openSnackBar('Added!', 'Close', 5000, 'top');
+    this.ipAddressService.createEntry(formData).subscribe(
+      (data: any) => {
+      this.openSnackBar(data.message, 'Close', 5000, 'top');
     },
     error => {
-      this.openSnackBar('raw error: ' + error, 'Close', 15000, 'top');
+        this.openSnackBar(error, 'Close', 10000, 'top');
     });
   }
 
 
-  getErrorMessage() {
+  getErrorMessage(): string {
     if (this.ipp.hasError('required')) {
       return 'You must enter a value';
     }
@@ -79,7 +83,7 @@ export class IpAddressComponent implements OnInit {
     return this.ipp.hasError('ipp') ? 'Not a valid ip address' : '';
   }
 
-  getErrorForNewEntry() {
+  getErrorForNewEntry(): string {
     if (this.newIP1.hasError('required')) {
       return 'You must enter a value';
     }
@@ -91,7 +95,7 @@ export class IpAddressComponent implements OnInit {
 
   }
 
-  openSnackBar(message: string, action: string, duration: number, pos: any) {
+  openSnackBar(message: string, action: string, duration: number, pos: any): void {
     this.snackBar.open(message, action, {
       duration, verticalPosition: pos
     });

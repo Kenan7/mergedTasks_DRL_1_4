@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,12 +12,21 @@ export class IpaddressService {
   constructor(private httpService: HttpClient) { }
 
   getIP(ip: string): Observable<any> {
-    return this.httpService.get(this.baseURL + '/get/' + ip);
+    return this.httpService.get(this.baseURL + '/get/' + ip)
+    .pipe(
+      catchError(error => this.errorHandler(error))
+    );
   }
 
-  createEntry(formData: any) {
-    return this.httpService.post(this.baseURL + '/create', formData);
+  createEntry(formData: any): Observable<any> {
+    return this.httpService.post(this.baseURL + '/add', formData)
+    .pipe(
+      catchError(error => this.errorHandler(error))
+    );
   }
 
+  errorHandler(error: HttpErrorResponse): Observable<any> {
+    return throwError(error.error.message);
+  }
 
 }
